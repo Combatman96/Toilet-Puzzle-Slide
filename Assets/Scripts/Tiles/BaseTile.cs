@@ -11,10 +11,11 @@ public class BaseTile : MonoBehaviour
     [SerializeField] private Transform m_wayPointGroup;
     [SerializeField] protected List<TileType> m_connectableTiles;
 
-    public TileType outDirection;
+    public Direction outDirection;
 
     public void Slide(Vector3 destination, float duration)
     {
+        if(!m_isMoveable) return;
         transform.DOMove(destination, duration, true).OnComplete(() =>
         {
             //TODO: Call action when the tile have silded to new position
