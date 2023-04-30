@@ -11,6 +11,8 @@ public class BaseTile : MonoBehaviour
     [SerializeField] private Transform m_wayPointGroup;
     [SerializeField] protected List<TileType> m_connectableTiles;
 
+    public TileType outDirection;
+
     public void Slide(Vector3 destination, float duration)
     {
         transform.DOMove(destination, duration, true).OnComplete(() =>
@@ -30,7 +32,7 @@ public class BaseTile : MonoBehaviour
         return m_wayPointGroup.GetComponentsInChildren<Transform>().ToList();
     }
 
-    public List<TileType> GetConnectableTiles()
+    public List<TileType> GetConnectableTilesOut()
     {
         return m_connectableTiles;
     }
@@ -44,7 +46,7 @@ public enum TileType
     Straight_Horizontal,
     
     Curve_Down_Right = 20,
-    Curve_Left_Down ,
+    Curve_Left_Down,
     Curve_Up_Left,
     Curve_Right_Up,
 
@@ -52,7 +54,7 @@ public enum TileType
     End 
 }
 
-public enum SlideDirection
+public enum Direction
 {
     Up,
     Down,

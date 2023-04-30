@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class TileCurve : BaseTile
 {
+    public Direction intDirection;
+    [SerializeField] List<TileType> m_otherConnectedTiles;
+
     public override List<Transform> GetWaypoints()
     {
         Stickman stickman = FindObjectOfType<Stickman>();
@@ -19,5 +22,10 @@ public class TileCurve : BaseTile
             return waypoints;
         waypoints.Reverse();
         return waypoints;
+    }
+
+    public List<TileType> GetConenectedTilesIn()
+    {
+        return m_otherConnectedTiles;
     }
 }
