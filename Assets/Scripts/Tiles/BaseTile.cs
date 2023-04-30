@@ -42,16 +42,23 @@ public enum TileType
 {
     Empty = 0,
 
-    Straight_Vertical = 10,
+    Straight_Vertical = 100,
     Straight_Horizontal,
     
-    Curve_Down_Right = 20,
+    Curve_Down_Right = 200,
     Curve_Left_Down,
     Curve_Up_Left,
     Curve_Right_Up,
 
-    Start = 30,
-    End 
+    Start_Up = 300,
+    Start_Down,
+    Start_Left,
+    Start_Right,
+
+    End_Up = 400, 
+    End_Down,
+    End_Left,
+    End_Right
 }
 
 public enum Direction
