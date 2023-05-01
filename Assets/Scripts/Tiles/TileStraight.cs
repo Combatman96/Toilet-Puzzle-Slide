@@ -5,10 +5,16 @@ using UnityEngine;
 public class TileStraight : BaseTile
 {
     public Direction inDirection;
-    [SerializeField] List<TileType> m_otherConnectedTiles;
+    [SerializeField] List<TileType> m_listConnectableTilesIn;
+    public Direction outDirection;
+    [SerializeField] List<TileType> m_listConnectanleTilesOut;
 
-    public List<TileType> GetConenectedTilesIn()
+    public override List<TileType> GetConnectableTiles(Direction direction)
     {
-        return m_otherConnectedTiles;
+        if(direction == inDirection)
+            return m_listConnectableTilesIn;
+        if(direction == outDirection)
+            return m_listConnectanleTilesOut;
+        return null;
     }
 }

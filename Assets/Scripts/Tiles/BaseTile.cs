@@ -9,9 +9,6 @@ public class BaseTile : MonoBehaviour
     [SerializeField] protected bool m_isMoveable = true;
     [SerializeField] protected TileType m_tileType;
     [SerializeField] private Transform m_wayPointGroup;
-    [SerializeField] protected List<TileType> m_connectableTiles;
-
-    public Direction outDirection;
 
     public void Slide(Vector3 destination, float duration)
     {
@@ -33,9 +30,9 @@ public class BaseTile : MonoBehaviour
         return m_wayPointGroup.GetComponentsInChildren<Transform>().ToList();
     }
 
-    public List<TileType> GetConnectableTilesOut()
+    public virtual List<TileType> GetConnectableTiles(Direction direction)
     {
-        return m_connectableTiles;
+        return new List<TileType>();
     }
 }
 

@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class TileCurve : BaseTile
 {
-    public Direction intDirection;
-    [SerializeField] List<TileType> m_otherConnectedTiles;
+
+    public Direction inDirection;
+    [SerializeField] List<TileType> m_listConnectableTilesIn;
+    public Direction outDirection;
+    [SerializeField] List<TileType> m_listConnectableTilesOut;
+
 
     public override List<Transform> GetWaypoints()
     {
@@ -24,8 +28,12 @@ public class TileCurve : BaseTile
         return waypoints;
     }
 
-    public List<TileType> GetConenectedTilesIn()
+    public override List<TileType> GetConnectableTiles(Direction direction)
     {
-        return m_otherConnectedTiles;
+        if(direction == inDirection)
+            return m_listConnectableTilesIn;
+        if(direction == outDirection)
+            return m_listConnectableTilesOut;
+        return null;
     }
 }
