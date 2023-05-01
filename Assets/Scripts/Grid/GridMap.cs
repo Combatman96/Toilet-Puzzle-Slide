@@ -77,4 +77,50 @@ public class GridMap : MonoBehaviour
             return Direction.Right;
         return Direction.Still;
     }
+
+    private Dictionary<Vector2Int, BaseTile> m_visitedTiles;
+
+    public Dictionary<Vector2Int, BaseTile> GetPathTile()
+    {
+        return m_visitedTiles;
+    }
+
+    public bool IsHavePath()
+    {
+        m_visitedTiles.Clear();
+        Vector2Int startCoord = m_gridMap.FirstOrDefault(x => x.Value.IsStartTile()).Value.GetCoordinate();
+        return IsHavePath(startCoord);
+    }
+
+    private bool IsHavePath(Vector2Int coord) //dfs
+    {
+        BaseTile currentTile = m_gridMap[coord];
+        if(currentTile.IsEndTile())
+        {
+            m_visitedTiles.Add(coord, currentTile);
+            return true;
+        }    
+
+        m_visitedTiles.Add(coord, currentTile);
+        Vector2Int[] steps = GetSurroundingSteps(currentTile);
+        foreach(Vector2Int step in steps)
+        {
+            Vector2Int nextCoord = coord + step;
+            if(nextCoord.x >=0 && nextCoord.y < 4) // check out of bound
+            {
+                var nextTile = m_gridMap[nextCoord];
+                if(nextTile == null)
+                    continue;
+                bool isVisited = m_visitedTiles.ContainsKey(nextCoord);
+                var connectableTiles = currentTile.GetConnectableTiles(GetStepDirection(step));
+                bool canStepToNextTile = connectableTiles.Contains(nextTile.GetTileType());
+                if(!isVisited && canStepToNextTile)
+                {
+                    if(IsHavePath(nextCoord)) return true;
+                }
+            }
+        }
+
+        return false;
+    }
 }

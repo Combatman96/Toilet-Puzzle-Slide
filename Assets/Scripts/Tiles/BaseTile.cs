@@ -39,6 +39,16 @@ public class BaseTile : MonoBehaviour
     {
         return GetComponentInParent<Node>().coordinate;
     }
+
+    public bool IsStartTile()
+    {
+        return ((int)m_tileType >= 300 && (int)m_tileType < 400);
+    }
+
+    public bool IsEndTile()
+    {
+        return (int)m_tileType >= 400;
+    }
 }
 
 public enum TileType
