@@ -11,6 +11,11 @@ public class Stickman : MonoBehaviour
     public static readonly int s_happy = Animator.StringToHash("Happy");
     public static readonly int s_noPaper = Animator.StringToHash("No_Paper");
 
+    public void SetState(int state)
+    {
+        PlayAnimation(state);
+    }
+
     private void PlayAnimation(int state) 
     {
         m_animator.CrossFade(state, 0.3f, 0);

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572793134834066380}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572793135212678267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: WaypointGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572793135435736148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2572793135610036333}
   - component: {fileID: 2572793135610036332}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Path
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2572793136024819503}
   - component: {fileID: 2572793136024819496}
-  m_Layer: 0
+  - component: {fileID: 6464939227105154933}
+  m_Layer: 6
   m_Name: TileCurve
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,10 +224,36 @@ MonoBehaviour:
   m_isMoveable: 1
   m_tileType: 0
   m_wayPointGroup: {fileID: 2572793135212678267}
-  m_connectableTiles: 
+  inDirection: 0
+  m_listConnectableTilesIn: 
   outDirection: 0
-  intDirection: 0
-  m_otherConnectedTiles: 
+  m_listConnectableTilesOut: 
+--- !u!61 &6464939227105154933
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2572793136024819497}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &2572793136051360852
 GameObject:
   m_ObjectHideFlags: 0
@@ -237,7 +264,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2572793136051360859}
   - component: {fileID: 2572793136051360858}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +345,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572793136577975595}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -350,7 +377,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572793136645593262}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Waypoint (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
