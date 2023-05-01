@@ -34,6 +34,11 @@ public class BaseTile : MonoBehaviour
     {
         return new List<TileType>();
     }
+
+    public Vector2Int GetCoordinate()
+    {
+        return GetComponentInParent<Node>().coordinate;
+    }
 }
 
 public enum TileType
@@ -64,5 +69,6 @@ public enum Direction
     Up,
     Down,
     Left,
-    Right
+    Right,
+    Still
 }
