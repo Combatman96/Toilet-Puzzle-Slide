@@ -95,5 +95,21 @@ PrefabInstance:
       propertyPath: m_connectableTiles.Array.data[2]
       value: 201
       objectReference: {fileID: 0}
+    - target: {fileID: 6176388589530416038, guid: 2f3ccdede70d7434c9bb5c88debeb13d, type: 3}
+      propertyPath: m_listConnectableTilesOut.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176388589530416038, guid: 2f3ccdede70d7434c9bb5c88debeb13d, type: 3}
+      propertyPath: m_listConnectableTilesOut.Array.data[0]
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176388589530416038, guid: 2f3ccdede70d7434c9bb5c88debeb13d, type: 3}
+      propertyPath: m_listConnectableTilesOut.Array.data[1]
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176388589530416038, guid: 2f3ccdede70d7434c9bb5c88debeb13d, type: 3}
+      propertyPath: m_listConnectableTilesOut.Array.data[2]
+      value: 201
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2f3ccdede70d7434c9bb5c88debeb13d, type: 3}
