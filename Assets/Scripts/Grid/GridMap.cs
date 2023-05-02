@@ -5,11 +5,13 @@ using System.Linq;
 
 public class GridMap : MonoBehaviour
 {
-    private Dictionary<Vector2Int, BaseTile> m_gridMap;
+    private Dictionary<Vector2Int, BaseTile> m_gridMap = new Dictionary<Vector2Int, BaseTile>();
+    private Dictionary<Vector2Int, Node> m_nodeList = new Dictionary<Vector2Int, Node>();
 
     public void SetUpGridMap()
     {
         m_gridMap.Clear();
+        m_nodeList.Clear();
 
         Node[] nodes = GetComponentsInChildren<Node>();
         for (int i = 0; i < nodes.Length; i++)
@@ -17,6 +19,7 @@ public class GridMap : MonoBehaviour
             Node node = nodes[i];
             BaseTile tile = node.GetComponentInChildren<BaseTile>();
             m_gridMap.Add(node.coordinate, tile);
+            m_nodeList.Add(node.coordinate, node);
         }
     }
 
@@ -78,9 +81,9 @@ public class GridMap : MonoBehaviour
         return Direction.Still;
     }
 
-    private Dictionary<Vector2Int, BaseTile> m_visitedTiles;
+    [SerializeField] private List<BaseTile> m_visitedTiles = new List<BaseTile>();
 
-    public Dictionary<Vector2Int, BaseTile> GetPathTile()
+    public List<BaseTile> GetPathTile()
     {
         return m_visitedTiles;
     }
@@ -97,21 +100,21 @@ public class GridMap : MonoBehaviour
         BaseTile currentTile = m_gridMap[coord];
         if(currentTile.IsEndTile())
         {
-            m_visitedTiles.Add(coord, currentTile);
+            m_visitedTiles.Add(currentTile);
             return true;
         }    
 
-        m_visitedTiles.Add(coord, currentTile);
+        m_visitedTiles.Add(currentTile);
         Vector2Int[] steps = GetSurroundingSteps(currentTile);
         foreach(Vector2Int step in steps)
         {
             Vector2Int nextCoord = coord + step;
-            if(nextCoord.x >=0 && nextCoord.y < 4) // check out of bound
+            if(nextCoord.x >= 0 && nextCoord.y < 4) // check out of bound
             {
                 var nextTile = m_gridMap[nextCoord];
                 if(nextTile == null)
                     continue;
-                bool isVisited = m_visitedTiles.ContainsKey(nextCoord);
+                bool isVisited = m_visitedTiles.Contains(nextTile);
                 var connectableTiles = currentTile.GetConnectableTiles(GetStepDirection(step));
                 bool canStepToNextTile = connectableTiles.Contains(nextTile.GetTileType());
                 if(!isVisited && canStepToNextTile)
@@ -122,5 +125,17 @@ public class GridMap : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SlideTile(BaseTile tile, Vector2Int direction)
+    {
+        Vector2Int curCoord = GetTileCoordinate(tile);
+        Vector2Int nextCoord = curCoord + direction;
+        if(!m_gridMap.ContainsKey(nextCoord) || m_gridMap[nextCoord] != null)
+            return;
+        var nextNode = m_nodeList[nextCoord];
+        tile.transform.SetParent(nextNode.transform);
+        UpdateGridMap();
+        tile.Slide(nextNode.transform.position, 0.5f);
     }
 }
