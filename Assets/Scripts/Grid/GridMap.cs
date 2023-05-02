@@ -140,6 +140,6 @@ public class GridMap : MonoBehaviour
         var nextNode = m_nodeList[nextCoord];
         tile.transform.SetParent(nextNode.transform);
         UpdateGridMap();
-        tile.Slide(nextNode.transform.position, 0.2f);
+        tile.Slide(nextNode.transform.position, 0.15f);
     }
 }

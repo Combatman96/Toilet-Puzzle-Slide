@@ -11,6 +11,8 @@ public class Gameplay : MonoBehaviour
     public LayerMask tileLayer;
     [SerializeField] private float m_dragThreadhold = 0.3f;
 
+    public bool hasPaper = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,6 +22,7 @@ public class Gameplay : MonoBehaviour
     void OnNewGame()
     {
         m_selectedTile = null;
+        hasPaper = false;
         gridMap.SetUpGridMap();
         stickman.SetState(Stickman.s_idle);
     }
@@ -67,12 +70,19 @@ public class Gameplay : MonoBehaviour
         {
             var pathTile = gridMap.GetPathTile();
             Vector2[] path = pathTile.Select(x => (Vector2) x.transform.position).ToArray();
-            stickman.MoveAlongPath(path, 1f);
+            stickman.MoveAlongPath(path, 2f);
+            stickman.SetState(Stickman.s_run);
         }
     }
 
     public void OnTileSlideCompleted()
     {
         CheckPath();
+    }
+
+    public void OnReachGoal()
+    {
+        int state = (hasPaper) ? Stickman.s_happy : Stickman.s_noPaper;
+        stickman.SetState(state);
     }
 }
