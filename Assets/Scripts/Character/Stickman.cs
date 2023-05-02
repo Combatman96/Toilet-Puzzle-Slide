@@ -21,7 +21,7 @@ public class Stickman : MonoBehaviour
 
     private void PlayAnimation(int state)
     {
-        m_animator.CrossFade(state, 0.3f, 0);
+        m_animator.CrossFade(state, 0.02f, 0);
     }
 
 
@@ -57,7 +57,7 @@ public class Stickman : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         m_gameplay.hasPaper = true;
         other.gameObject.SetActive(false);

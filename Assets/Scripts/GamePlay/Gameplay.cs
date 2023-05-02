@@ -70,7 +70,7 @@ public class Gameplay : MonoBehaviour
         {
             var pathTile = gridMap.GetPathTile();
             Vector2[] path = pathTile.Select(x => (Vector2) x.transform.position).ToArray();
-            stickman.MoveAlongPath(path, 2f);
+            stickman.MoveAlongPath(path, 1.2f);
             stickman.SetState(Stickman.s_run);
         }
     }
