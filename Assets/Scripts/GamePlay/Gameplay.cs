@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Gameplay : MonoBehaviour
 {
@@ -60,4 +61,18 @@ public class Gameplay : MonoBehaviour
         return new Vector2Int( (int) dir.normalized.x, (int) dir.normalized.y);
     }
 
+    private void CheckPath()
+    {
+        if(gridMap.IsHavePath())
+        {
+            var pathTile = gridMap.GetPathTile();
+            Vector2[] path = pathTile.Select(x => (Vector2) x.transform.position).ToArray();
+            stickman.MoveAlongPath(path, 1f);
+        }
+    }
+
+    public void OnTileSlideCompleted()
+    {
+        CheckPath();
+    }
 }

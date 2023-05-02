@@ -7,6 +7,7 @@ public class GridMap : MonoBehaviour
 {
     private Dictionary<Vector2Int, BaseTile> m_gridMap = new Dictionary<Vector2Int, BaseTile>();
     private Dictionary<Vector2Int, Node> m_nodeList = new Dictionary<Vector2Int, Node>();
+    [SerializeField] Vector2Int m_startCoord;
 
     public void SetUpGridMap()
     {
@@ -20,6 +21,10 @@ public class GridMap : MonoBehaviour
             BaseTile tile = node.GetComponentInChildren<BaseTile>();
             m_gridMap.Add(node.coordinate, tile);
             m_nodeList.Add(node.coordinate, node);
+            if(tile && tile.IsStartTile())
+            {
+                m_startCoord = tile.GetCoordinate();
+            }
         }
     }
 
@@ -91,8 +96,7 @@ public class GridMap : MonoBehaviour
     public bool IsHavePath()
     {
         m_visitedTiles.Clear();
-        Vector2Int startCoord = m_gridMap.FirstOrDefault(x => x.Value.IsStartTile()).Value.GetCoordinate();
-        return IsHavePath(startCoord);
+        return IsHavePath(m_startCoord);
     }
 
     private bool IsHavePath(Vector2Int coord) //dfs
@@ -136,6 +140,6 @@ public class GridMap : MonoBehaviour
         var nextNode = m_nodeList[nextCoord];
         tile.transform.SetParent(nextNode.transform);
         UpdateGridMap();
-        tile.Slide(nextNode.transform.position, 0.5f);
+        tile.Slide(nextNode.transform.position, 0.2f);
     }
 }

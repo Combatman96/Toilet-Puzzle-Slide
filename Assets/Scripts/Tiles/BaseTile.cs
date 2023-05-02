@@ -10,12 +10,20 @@ public class BaseTile : MonoBehaviour
     [SerializeField] protected TileType m_tileType;
     [SerializeField] private Transform m_wayPointGroup;
 
+    private Gameplay m_gameplay => FindObjectOfType<Gameplay>();
+
     public void Slide(Vector3 destination, float duration)
     {
         if(!m_isMoveable) return;
-        transform.DOMove(destination, duration, true).OnComplete(() =>
+        transform.localScale = Vector3.one;
+        var sequence = DOTween.Sequence();
+        sequence.Append(transform.DOScale(Vector3.one * 0.7f, duration * 0.2f));
+        sequence.Append(transform.DOMove(destination, duration * 0.8f, false));
+        sequence.Append(transform.DOScale(Vector3.one, duration * 0.2f));
+        sequence.OnComplete(() =>
         {
             //TODO: Call action when the tile have silded to new position
+            m_gameplay.OnTileSlideCompleted();
         } 
         );
     }
