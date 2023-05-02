@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class Gameplay : MonoBehaviour
 {
@@ -72,6 +73,7 @@ public class Gameplay : MonoBehaviour
             Vector2[] path = pathTile.Select(x => (Vector2) x.transform.position).ToArray();
             stickman.MoveAlongPath(path, 1.2f);
             stickman.SetState(Stickman.s_run);
+            gridMap.ClearNonPath();
         }
     }
 
@@ -84,5 +86,13 @@ public class Gameplay : MonoBehaviour
     {
         int state = (hasPaper) ? Stickman.s_happy : Stickman.s_noPaper;
         stickman.SetState(state);
+        StartCoroutine(ResetGame());
+    }
+
+    private IEnumerator ResetGame()
+    {
+        yield return new WaitForSeconds(3.5f);
+        var scene = SceneManager.GetActiveScene();
+        SceneManager.LoadScene(scene.name);
     }
 }

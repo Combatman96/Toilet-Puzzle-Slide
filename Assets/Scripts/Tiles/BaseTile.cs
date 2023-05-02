@@ -57,6 +57,12 @@ public class BaseTile : MonoBehaviour
     {
         return (int)m_tileType >= 400;
     }
+
+    public void Disappear()
+    {
+        transform.localScale = Vector3.one;
+        transform.DOScale(0f, 0.4f).SetEase(Ease.InOutQuad);
+    }
 }
 
 public enum TileType

@@ -142,4 +142,16 @@ public class GridMap : MonoBehaviour
         UpdateGridMap();
         tile.Slide(nextNode.transform.position, 0.15f);
     }
+
+    public void ClearNonPath()
+    {
+        foreach(var x in m_gridMap)
+        {
+            var tile = x.Value;
+            if( tile != null && !m_visitedTiles.Contains(tile))
+            {
+                tile.Disappear();
+            }
+        }
+    }
 }
