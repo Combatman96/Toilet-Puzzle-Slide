@@ -11,7 +11,7 @@ public class Gameplay : MonoBehaviour
     [SerializeField] private BaseTile m_selectedTile;
     public LayerMask tileLayer;
     [SerializeField] private float m_dragThreadhold = 0.3f;
-
+    [SerializeField] private Transform m_cursor;
     public bool hasPaper = false;
 
     // Start is called before the first frame update
@@ -23,6 +23,7 @@ public class Gameplay : MonoBehaviour
     void OnNewGame()
     {
         m_selectedTile = null;
+        m_cursor.transform.position = new Vector3(600f, 0, 0);
         hasPaper = false;
         gridMap.SetUpGridMap();
         stickman.SetState(Stickman.s_idle);
@@ -38,6 +39,7 @@ public class Gameplay : MonoBehaviour
             if(hit) 
             {
                 m_selectedTile = hit.transform.GetComponent<BaseTile>();
+                m_cursor.transform.position = m_selectedTile.transform.position;
             }
         }
         if(Input.GetMouseButtonUp(0) && m_selectedTile)
@@ -48,7 +50,9 @@ public class Gameplay : MonoBehaviour
                 gridMap.SlideTile(m_selectedTile, GetDirection(selectedTilePos, touchPos));
             }
             m_selectedTile = null;
+            m_cursor.transform.position = new Vector3(600f, 0, 0);
         }
+
     }
 
     private Vector2Int GetDirection(Vector2 oldPos, Vector2 newPos)
